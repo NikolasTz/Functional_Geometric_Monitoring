@@ -1,4 +1,6 @@
 
+
+
 <p>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-gree.svg)](https://opensource.org/licenses/MIT?style=plastic) 
@@ -30,29 +32,34 @@ Functional Geometric Monitoring is a technique that can be applied to any monito
 The project structure was organized as follow:
 
 * Worker
-  * Worker logic
-  * Worker structure
+  1. Worker logic
+  2. Worker structure
 * Coordinator
-  * Coordinator logic
-  * Coordinator structure
+  1.  Coordinator logic
+  2.  Coordinator structure
 * State
-  * Coordinator state
-  * Worker State
+  1. Coordinator state
+  2. Worker State
 * Datatypes
-  * Vector
-  * Sketches
-    * Count-Min
-    * AGMS 
+  1.  Vector
+  2.  Sketches
+        1.  Count-Min
+        1.  AGMS 
 * SafeZone
 * Job
-  * JobIteration
-  * JobKafka
+  1. JobIteration
+  2. JobKafka
 
 
 ## Architecture
 
-The two main components of the architecture are the Workers and the Coordinator. Each of these operators is a [KeyedCoProcess](https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/operators/process_function/#the-keyedprocessfunction) operator. In particular, the Workers operator has two inputs, the first refers to the **Input** source and the second to the **Feedback** source that contains the control messages from the Coordinator. Respectively the Coordinator has two inputs, the first refers to the control messages from the Coordinator, and the second to the user-posed queries(**Query** source). Each of these operators has a [side-output](https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/side_output/). The side-outputs in this case act as a **logging** mechanism that records metrics/information about the system such as the communication cost, throughput, latency, and back-pressure.
-Regarding the implementation of the  feedback loop, there are two approaches.The first implementation uses as feedback loop a **Kafka topic** that acts as buffer between the Workers and the Coordinator.The second implementation uses as feedback loop the build-in operator of [Iterative stream](https://nightlies.apache.org/flink/flink-docs-master/docs/dev/dataset/iterations/).
+The two main components of the architecture are the Workers and the Coordinator. Each of these operators is a 
+<a href="https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/operators/process_function/#the-keyedprocessfunction" target="_blank"> KeyedCoProcess</a>
+operator. In particular, the Workers operator has two inputs, the first refers to the **Input** source and the second to the **Feedback** source that contains the control messages from the Coordinator. Respectively the Coordinator has two inputs, the first refers to the control messages from the Coordinator, and the second to the user-posed queries(**Query** source). Each of these operators has a 
+<a href="https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/side_output/" target="_blank">side-output</a>. 
+The side-outputs in this case act as a **logging** mechanism that records metrics/information about the system such as the communication cost, throughput, latency, and back-pressure.
+Regarding the implementation of the  feedback loop, there are two approaches.The first implementation uses as feedback loop a **Kafka topic** that acts as buffer between the Workers and the Coordinator.The second implementation uses as feedback loop the build-in operator of 
+<a href="https://nightlies.apache.org/flink/flink-docs-master/docs/dev/dataset/iterations/" target="_blank">Iterative stream</a>.
 
 
 <p align="center">
