@@ -22,11 +22,8 @@
 
 > Integration of the Functional Geometric Monitoring (FGM) method in the Apache Flink platform
 
-<p align="justify">
 
 Functional Geometric Monitoring is a technique that can be applied to any monitoring problem in order to perform distributed and scalable monitoring with minimal communication cost.The FGM method is a method that is independent of the monitoring problem, to achieve this the method uses a problem-specific family of functions termed safe functions.Finally, the FGM method can be naturally adapted under adverse conditions of the monitoring problem such as very tight monitoring bounds and the presence of skew in the distribution of data among the distributed nodes.
-
-</p>
 
 ## Project Structure
 
@@ -54,16 +51,13 @@ The project structure was organized as follow:
 
 ## Architecture
 
-<div style="text-align: justify">
-
 The two main components of the architecture are the Workers and the Coordinator. Each of these operators is a [KeyedCoProcess](https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/operators/process_function/#the-keyedprocessfunction) operator. In particular, the Workers operator has two inputs, the first refers to the **Input** source and the second to the **Feedback** source that contains the control messages from the Coordinator. Respectively the Coordinator has two inputs, the first refers to the control messages from the Coordinator, and the second to the user-posed queries(**Query** source). Each of these operators has a [side-output](https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/side_output/). The side-outputs in this case act as a **logging** mechanism that records metrics/information about the system such as the communication cost, throughput, latency, and back-pressure.
 Regarding the implementation of the  feedback loop, there are two approaches.The first implementation uses as feedback loop a **Kafka topic** that acts as buffer between the Workers and the Coordinator.The second implementation uses as feedback loop the build-in operator of [Iterative stream](https://nightlies.apache.org/flink/flink-docs-master/docs/dev/dataset/iterations/).
 
-</div>
 
 <p align="center">
 
-![Alt text](img/readme/project_structure.png)
+![Alt text](img/readme/abstract_project_structure.png)
 
 </p>
 
