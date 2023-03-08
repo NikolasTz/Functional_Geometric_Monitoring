@@ -57,7 +57,7 @@ Regarding the implementation of the  feedback loop, there are two approaches.The
 
 <p align="center">
 
-![Alt text](img/readme/abstract_project_structure.png)
+![Alt text](img/readme/abstract_project_architecture.png)
 
 </p>
 
